@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Goa",
+    "state": "Goa",
+    "description": "Famous for beaches and nightlife.",
+    "lat": 15.2993,
+    "lng": 74.1240,
+    "category": "coastal",
+    "image": "https://source.unsplash.com/400x300/?goa,beach"
+  },
+  {
+    "name": "Jaipur",
+    "state": "Rajasthan",
+    "description": "The Pink City known for forts and palaces.",
+    "lat": 26.9124,
+    "lng": 75.7873,
+    "category": "heritage",
+    "image": "https://source.unsplash.com/400x300/?jaipur,fort"
+  },
+  {
+    "name": "Sikkim",
+    "state": "Sikkim",
+    "description": "Beautiful Himalayan state.",
+    "lat": 27.5330,
+    "lng": 88.5122,
+    "category": "mountain",
+    "image": "https://source.unsplash.com/400x300/?sikkim,mountains"
+  }
+]
