@@ -1,3 +1,4 @@
+/* GLOBAL */
 body {
   margin: 0;
   font-family: "Segoe UI", sans-serif;
@@ -10,15 +11,16 @@ body {
   background: #d1f0b1;
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
   padding: 0 40px;
+  position: relative;
+  z-index: 1100; /* always on top */
 }
 
-.logo{
+.logo {
   flex: 1;
 }
 
-.searchbox{
+.searchbox {
   flex: 2;
 }
 
@@ -39,8 +41,9 @@ body {
 /* MAP AREA */
 .map-area {
   flex: 1;
-  height: 500px;
+  height: calc(100vh - 70px); /* full screen below navbar */
   background: white;
+  margin-right: 350px; /* prevents overlap with sidebar */
 }
 
 /* SIDEBAR */
@@ -50,88 +53,78 @@ body {
   position: fixed;
   right: 0;
   top: 0;
-  bottom: 0;
+  height: calc(100vh-70px);
   display: flex;
   flex-direction: column;
+  z-index: 1200; /* above map */
 }
 
 /* TOP TABS */
 .sidebar-tabs {
-  
   display: flex;
   justify-content: space-around;
   align-items: center;
   background: #d1f0b1;
-  padding: 0;
   height: 70px;
+  flex-shrink: 0;
 }
 
-.tab {
-  cursor: pointer;
-  padding: 24.5px 35px;
-  margin: 0;
- /*  border-radius: 6px; */
-  text-transform: lowercase;
-  transition: 0.3s;
-}
-
-.tab:hover {
-  background: #40916c;
-  color: white; 
-}
-
-.tab.active {
-  background: #a0bf80;
-  color: white;
-}
-
-/* SCROLL AREA */
 .sidebar-content {
   flex: 1;
   overflow-y: auto;
   padding: 15px;
 }
 
+/* TAB BUTTONS */
+.tab {
+  cursor: pointer;
+  padding: 20px 30px;
+  text-transform: lowercase;
+  transition: 0.3s;
+}
+
+.tab:hover {
+  background: #90b77d;
+  color: white;
+}
+
+.tab.active {
+  background: #7aa86f;
+  color: white;
+}
+
+/* SCROLLABLE CONTENT */
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+}
+
+/* CARDS */
 .card {
   background: white;
   padding: 12px;
   margin-bottom: 15px;
   border-radius: 10px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* IMAGE PLACEHOLDER */
 .image-placeholder {
-  height: 100px;
+  height: 120px;
   background: #d8f3dc;
   margin-bottom: 10px;
-}
-
-/* CONTENT */
-.content-area {
-  padding: 20px;
-  margin-right: 200px;
-}
-
-/* CARD */
-.card-container {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.card {
-  background: white;
-  padding: 15px;
-  width: 280px;
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.image-placeholder {
-  height: 200px;
-  background: #d8f3dc;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+}
+
+/* OPTIONAL: SCROLLBAR STYLING */
+.sidebar-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+  background: #7aa86f;
+  border-radius: 10px;
 }

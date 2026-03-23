@@ -4,21 +4,13 @@ import Profile from "../pages/Profile";
 
 function Sidebar({ activeTab, setActiveTab }) {
   const renderContent = () => {
-    switch (activeTab) {
-      case "wishlist":
-        return <Wishlist />;
-      case "archive":
-        return <Archive />;
-      case "profile":
-        return <Profile />;
-      default:
-        return <Wishlist />;
-    }
+    if (activeTab === "wishlist") return <Wishlist />;
+    if (activeTab === "archive") return <Archive />;
+    if (activeTab === "profile") return <Profile />;
   };
 
   return (
     <div className="sidebar">
-      {/* TOP BUTTONS */}
       <div className="sidebar-tabs">
         <div
           className={`tab ${activeTab === "wishlist" ? "active" : ""}`}
@@ -26,12 +18,14 @@ function Sidebar({ activeTab, setActiveTab }) {
         >
           wishlist
         </div>
+
         <div
           className={`tab ${activeTab === "archive" ? "active" : ""}`}
           onClick={() => setActiveTab("archive")}
         >
           archive
         </div>
+
         <div
           className={`tab ${activeTab === "profile" ? "active" : ""}`}
           onClick={() => setActiveTab("profile")}
@@ -40,7 +34,6 @@ function Sidebar({ activeTab, setActiveTab }) {
         </div>
       </div>
 
-      {/* SCROLLABLE CONTENT */}
       <div className="sidebar-content">{renderContent()}</div>
     </div>
   );
