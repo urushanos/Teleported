@@ -1,8 +1,132 @@
-/* GLOBAL */
 body {
   margin: 0;
   font-family: "Segoe UI", sans-serif;
   background: #f7fbf9;
+}
+
+html, body, #root{
+  height: 100%;
+}
+
+/* SEARCH BOX */
+.search-container {
+  flex: 2;
+  /*
+  position: absolute;
+  top: 20px;
+  left: 80px;
+  z-index: 2000; */
+}
+
+.search-container input {
+  padding: 8px;
+  width: 320px;
+  height: 22px;
+  border-radius: 6px;
+  border: none;
+  margin-left: 50px;
+
+  /*width: 260px;
+  padding: 10px 15px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); */
+}
+
+/* SUGGESTIONS */
+.suggestions {
+  position: fixed;
+  width: 320px;
+  top: 60px;
+  left: 210px;
+  background: white;
+  margin-top: 25px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 2000;
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background: #f0fce6;
+}
+
+.map-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.leaflet-map {
+  height: 100%;
+  width: 100%;
+}
+
+/* FLOATING CARD */
+.floating-card {
+  position: fixed;
+  bottom: 30px;
+  left: 80px;
+  width: 260px;
+  background: white;
+  border-radius: 16px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1000;
+}
+
+.floating-card h3{
+  margin-bottom: 5px;
+}
+
+.state, .desc{
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+  font-size: 15px;
+}
+
+.desc{
+  color: gray;
+}
+
+/* IMAGE PLACEHOLDER */
+.image-placeholder {
+  height: 120px;
+  background: #d9d9d9;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+/* BUTTONS */
+.card-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.card-buttons button {
+  width: 48%;
+  padding: 8px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* MATCH YOUR GREEN THEME */
+.wishlist-btn {
+  background: #d1f0b1;
+}
+
+.visited-btn {
+  background: #bde0fe;
 }
 
 /* NAVBAR */
@@ -13,37 +137,24 @@ body {
   align-items: center;
   padding: 0 40px;
   position: relative;
-  z-index: 1100; /* always on top */
+  z-index: 1100;
 }
 
 .logo {
   flex: 1;
 }
 
-.searchbox {
-  flex: 2;
-}
-
-.navbar input {
-  padding: 8px;
-  width: 320px;
-  height: 22px;
-  border-radius: 6px;
-  border: none;
-  margin-left: 50px;
-}
-
 /* LAYOUT */
 .main-layout {
   display: flex;
+  height: calc(100vh - 70px);
+
 }
 
 /* MAP AREA */
 .map-area {
   flex: 1;
-  height: calc(100vh - 70px); /* full screen below navbar */
-  background: white;
-  margin-right: 350px; /* prevents overlap with sidebar */
+  position: relative;
 }
 
 /* SIDEBAR */
@@ -53,10 +164,10 @@ body {
   position: fixed;
   right: 0;
   top: 0;
-  height: calc(100vh-70px);
+  bottom: 0;
   display: flex;
   flex-direction: column;
-  z-index: 1200; /* above map */
+  z-index: 1200; 
 }
 
 /* TOP TABS */
