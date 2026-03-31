@@ -1,13 +1,7 @@
-import Wishlist from "../pages/Wishlist";
-import Archive from "../pages/Archive";
-import Profile from "../pages/Profile";
-
-function Sidebar({ activeTab, setActiveTab }) {
-  const renderContent = () => {
-    if (activeTab === "wishlist") return <Wishlist />;
-    if (activeTab === "archive") return <Archive />;
-    if (activeTab === "profile") return <Profile />;
-  };
+import React, { useState, useEffect } from "react";
+  
+  const Sidebar = ({ activeTab, setActiveTab, wishlist, visited }) => {
+  const data = activeTab === "wishlist" ? wishlist : visited;
 
   return (
     <div className="sidebar">
@@ -34,9 +28,21 @@ function Sidebar({ activeTab, setActiveTab }) {
         </div>
       </div>
 
-      <div className="sidebar-content">{renderContent()}</div>
+       <div className="sidebar-content">
+        {data.length === 0 ? (
+          <p>No places yet</p>
+        ) : (
+          data.map((place) => (
+            <div key={place._id} className="card">
+              <div className="image-placeholder">Image</div>
+              <h4>{place.name}</h4>
+              <p>{place.state}</p>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
-}
+};
 
 export default Sidebar;

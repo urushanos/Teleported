@@ -1,37 +1,26 @@
-import React, { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import React, { useState, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import FloatingCard from "./FloatingCard";
-import Navbar from "./Navbar";
 
-const FlyToLocation = ({ place }) => {
-  const map = useMap();
-
-  if (place) {
-    map.flyTo([place.lat, place.lng], 10, {
-      duration: 1.5,
-    });
-  }
-
-  return null;
-};
-
-const MapView = ({ selectedPlace }) => {
-
+const MapView = ({
+  selectedPlace,
+  setSelectedPlace,
+  setWishlist,
+  setVisited
+}) => {
   return (
-    <div className="map-page">
+    <div className="map-wrapper">
 
       <MapContainer
-        center={[22.9734, 83.6569]} // India center
+        center={[22.9734, 83.6569]}
         zoom={5}
-        style={{ height: "100vh", width: "100%" }}
+        style={{ height: "100%", width: "100%" }}
       >
         <TileLayer
           attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
-       <FlyToLocation place={selectedPlace} />
 
         {selectedPlace && (
           <Marker position={[selectedPlace.lat, selectedPlace.lng]}>
@@ -39,7 +28,13 @@ const MapView = ({ selectedPlace }) => {
           </Marker>
         )}
       </MapContainer>
-      
+
+      <FloatingCard
+        place={selectedPlace}
+        setSelectedPlace={setSelectedPlace}
+        setWishlist={setWishlist}
+        setVisited={setVisited}
+      />
 
     </div>
   );

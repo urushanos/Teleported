@@ -6,7 +6,8 @@ const placeSchema = new mongoose.Schema({
   description: String,
   lat: Number,
   lng: Number,
-  wishlist: Boolean
+  wishlist: { type: Boolean, default: false},
+  visited: { type: Boolean, default: false}
 });
 
 module.exports = mongoose.model("Place", placeSchema);
