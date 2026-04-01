@@ -2,6 +2,14 @@ import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import FloatingCard from "./FloatingCard";
+import L from "leaflet";
+import markerIcon from "../assets/marker.svg";
+
+const customIcon = new L.Icon({
+  iconUrl: markerIcon,
+  iconSize: [30, 40],
+  iconAnchor: [15, 40],
+});
 
 const MapView = ({
   selectedPlace,
@@ -21,7 +29,7 @@ const MapView = ({
         />
 
         {selectedPlace && (
-          <Marker position={[selectedPlace.lat, selectedPlace.lng]}>
+          <Marker position={[selectedPlace.lat, selectedPlace.lng]} icon={customIcon}>
             <Popup>{selectedPlace.name}</Popup>
           </Marker>
         )}

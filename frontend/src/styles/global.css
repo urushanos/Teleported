@@ -222,7 +222,7 @@ html, body, #root{
 
 /* IMAGE PLACEHOLDER */
 .image-placeholder {
-  height: 120px;
+  height: 180px;
   background: #d8f3dc;
   margin-bottom: 10px;
   display: flex;
