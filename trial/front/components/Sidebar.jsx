@@ -1,13 +1,7 @@
-const Sidebar = ({ activeTab, setActiveTab, wishlist, visited }) => {
-  let data = [];
-
-  if (activeTab === "wishlist") {
-    data = wishlist;
-  } else if (activeTab === "visited") {
-    data = visited;
-  } else {
-    data = [];
-  }
+import React, { useState, useEffect } from "react";
+  
+  const Sidebar = ({ activeTab, setActiveTab, wishlist, visited }) => {
+  const data = activeTab === "wishlist" ? wishlist : visited;
 
   return (
     <div className="sidebar">
@@ -20,8 +14,8 @@ const Sidebar = ({ activeTab, setActiveTab, wishlist, visited }) => {
         </div>
 
         <div
-          className={`tab ${activeTab === "visited" ? "active" : ""}`}
-          onClick={() => setActiveTab("visited")}
+          className={`tab ${activeTab === "archive" ? "active" : ""}`}
+          onClick={() => setActiveTab("archive")}
         >
           archive
         </div>
@@ -34,11 +28,9 @@ const Sidebar = ({ activeTab, setActiveTab, wishlist, visited }) => {
         </div>
       </div>
 
-      <div className="sidebar-content">
-        {activeTab === "profile" ? (
-          <div></div>
-        ) : data.length === 0 ? (
-          <p>No places yet :{'('}</p>
+       <div className="sidebar-content">
+        {data.length === 0 ? (
+          <p>No places yet</p>
         ) : (
           data.map((place) => (
             <div key={place._id} className="card">

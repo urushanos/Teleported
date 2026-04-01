@@ -8,22 +8,34 @@ import "./styles/global.css";
 function App() {
   const [activeTab, setActiveTab] = useState("wishlist");
   const [selectedPlace, setSelectedPlace] = useState(null);
+
   const [wishlist, setWishlist] = useState([]);
   const [visited, setVisited] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const wishlistRes = await axios.get("http://localhost:5000/api/places/wishlist");
-        const visitedRes = await axios.get("http://localhost:5000/api/places/visited");
-        setWishlist(wishlistRes.data);
-        setVisited(visitedRes.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchData();
-  }, []);
+  const fetchData = async () => {
+    try {
+      const wishlistRes = await axios.get(
+        "http://localhost:5000/api/places/wishlist"
+      );
+
+      const visitedRes = await axios.get(
+        "http://localhost:5000/api/places/visited"
+      );
+
+      setWishlist(wishlistRes.data);
+      setVisited(visitedRes.data);
+
+    } catch (err) {
+      console.error("Error loading sidebar data:", err);
+    }
+
+    console.log("wishlist:", wishlist);
+    console.log("visited:", visited);
+  };
+
+  fetchData();
+}, []);
 
   return (
     <div>
@@ -37,14 +49,16 @@ function App() {
             setWishlist={setWishlist}
             setVisited={setVisited}
           />
+
+            <Sidebar
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              wishlist={wishlist}
+              visited={visited}
+            />
         </div>
 
-        <Sidebar
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          wishlist={wishlist}
-          visited={visited}
-        />
+      
       </div>
     </div>
   );

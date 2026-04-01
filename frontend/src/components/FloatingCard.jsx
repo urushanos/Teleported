@@ -1,5 +1,4 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
 
 const FloatingCard = ({
   place,
@@ -10,53 +9,41 @@ const FloatingCard = ({
   if (!place) return null;
 
   const handleWishlist = async () => {
-    try {
-      const res = await axios.put(
-        `http://localhost:5000/api/places/wishlist/${place._id}`
-      );
+    const res = await axios.put(
+      `http://localhost:5000/api/places/wishlist/${place._id}`
+    );
 
-      const updated = res.data;
+    const updated = res.data;
 
-      setSelectedPlace(updated);
+    setSelectedPlace(updated);
 
-      setWishlist((prev) => {
-        const exists = prev.find(p => p._id === updated._id);
-
-        if (updated.wishlist) {
-          return exists ? prev : [...prev, updated];
-        } else {
-          return prev.filter((p) => p._id !== updated._id);
-        }
-      });
-
-    } catch (err) {
-      console.error(err);
-    }
+    setWishlist((prev) => {
+      const exists = prev.find(p => p._id === updated._id);
+      if (updated.wishlist) {
+        return exists ? prev : [...prev, updated];
+      } else {
+        return prev.filter(p => p._id !== updated._id);
+      }
+    });
   };
 
   const handleVisited = async () => {
-    try {
-      const res = await axios.put(
-        `http://localhost:5000/api/places/visited/${place._id}`
-      );
+    const res = await axios.put(
+      `http://localhost:5000/api/places/visited/${place._id}`
+    );
 
-      const updated = res.data;
+    const updated = res.data;
 
-      setSelectedPlace(updated);
+    setSelectedPlace(updated);
 
-      setVisited((prev) => {
-        const exists = prev.find(p => p._id === updated._id);
-
-        if (updated.visited) {
-          return exists ? prev : [...prev, updated];
-        } else {
-          return prev.filter((p) => p._id !== updated._id);
-        }
-      });
-
-    } catch (err) {
-      console.error(err);
-    }
+    setVisited((prev) => {
+      const exists = prev.find(p => p._id === updated._id);
+      if (updated.visited) {
+        return exists ? prev : [...prev, updated];
+      } else {
+        return prev.filter(p => p._id !== updated._id);
+      }
+    });
   };
 
   return (
@@ -73,7 +60,7 @@ const FloatingCard = ({
         </button>
 
         <button className="visited-btn" onClick={handleVisited}>
-          {place.visited ? "Visited" : "Archive"}
+          {place.visited ? "Visited!" : "Archive"}
         </button>
       </div>
     </div>

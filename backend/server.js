@@ -7,7 +7,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb://127.0.0.1:27017/travelDB");
+mongoose.connect("mongodb://127.0.0.1:27017/travelDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 app.use("/api/places", require("./routes/placeRoutes"));
 
