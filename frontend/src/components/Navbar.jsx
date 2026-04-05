@@ -1,10 +1,10 @@
 import SearchBar from "./SearchBar";
 
-function Navbar({ onSelectPlace }) {
+const Navbar = ({ setSelectedPlace }) => {
   return (
     <div className="navbar">
       <h2>Teleported</h2>
-      <SearchBar onSelectPlace={onSelectPlace} />
+      <SearchBar onSelectPlace={setSelectedPlace} />
     </div>
   );
 }

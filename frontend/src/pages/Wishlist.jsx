@@ -1,27 +1,29 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import PlaceCard from "../components/PlaceCard";
 
-function Wishlist() {
+const Wishlist = () => {
   const [places, setPlaces] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/places/wishlist")
-      .then((res) => setPlaces(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+  const addPlace = () => {
+    const name = prompt("Enter place name");
+    if (!name) return;
+
+    setPlaces([...places, { name }]);
+  };
 
   return (
     <div>
-      {places.map((place) => (
-        <div key={place._id} className="card">
-          <div className="image-placeholder"></div>
-          <h4>{place.name}</h4>
-          <p>{place.description}</p>
-        </div>
-      ))}
+      <h2>Wishlist</h2>
+
+      <button onClick={addPlace}>Add Place</button>
+
+      <div className="card-container">
+        {places.map((place, index) => (
+          <PlaceCard key={index} place={place} />
+        ))}
+      </div>
     </div>
   );
-}
+};
 
 export default Wishlist;

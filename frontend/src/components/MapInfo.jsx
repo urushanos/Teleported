@@ -35,12 +35,14 @@ const MapView = ({
         )}
       </MapContainer>
 
+      {selectedPlace && (
       <FloatingCard
         place={selectedPlace}
         setSelectedPlace={setSelectedPlace}
         setWishlist={setWishlist}
         setVisited={setVisited}
       />
+    )}
     </div>
   );
 };

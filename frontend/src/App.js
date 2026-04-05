@@ -1,50 +1,50 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
-import MapView from "./components/MapInfo";
+import React, { useState } from "react";
+//import "./App.css";
 import "./styles/global.css";
+
+import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
+import MapInfo from "./components/MapInfo";
+
+import Wishlist from "./pages/Wishlist";
+import Archive from "./pages/Archive";
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
   const [activeTab, setActiveTab] = useState("wishlist");
+  const [user, setUser] = useState(null);
+  const [authPage, setAuthPage] = useState("login");
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const [wishlist, setWishlist] = useState([]);
-  const [visited, setVisited] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const wishlistRes = await axios.get("http://localhost:5000/api/places/wishlist");
-        const visitedRes = await axios.get("http://localhost:5000/api/places/visited");
-        setWishlist(wishlistRes.data);
-        setVisited(visitedRes.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchData();
-  }, []);
+  if (!user) {
+    return authPage === "login" ? (
+      <Login setUser={setUser} switchPage={() => setAuthPage("signup")} />
+    ) : (
+      <Signup switchPage={() => setAuthPage("login")} />
+    );
+  }
 
   return (
-    <div>
-      <Navbar onSelectPlace={setSelectedPlace} />
+    <div className="app">
+      <Navbar setSelectedPlace={setSelectedPlace} />
 
-      <div className="main-layout">
-        <div className="map-area">
-          <MapView
-            selectedPlace={selectedPlace}
-            setSelectedPlace={setSelectedPlace}
-            setWishlist={setWishlist}
-            setVisited={setVisited}
-          />
-        </div>
+      <div className="main">
+        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-        <Sidebar
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          wishlist={wishlist}
-          visited={visited}
+        <MapInfo 
+          selectedPlace={selectedPlace}
+          setSelectedPlace={setSelectedPlace}
+          setWishlist={() => {}}
+          setVisited={() => {}}
         />
+
+        <div className="page-content">
+          {activeTab === "wishlist" && <Wishlist />}
+          {activeTab === "archive" && <Archive />}
+          {activeTab === "profile" && <Profile user={user} />}
+        </div>
       </div>
     </div>
   );
