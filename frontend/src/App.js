@@ -1,52 +1,37 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
-import MapView from "./components/MapInfo";
-import "./styles/global.css";
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
+import Login       from './pages/Login';
+import Signup      from './pages/Signup';
+import Home        from './pages/Home';
+import PlaceDetail from './pages/PlaceDetail';
+import StateDetail from './pages/StateDetail';
+import Explore     from './pages/Explore';
+import Wishlist    from './pages/Wishlist';
+import Visited     from './pages/Visited';
+import Visiting    from './pages/Visiting';
+
+const Protected = ({ children }) => {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? children : <Navigate to="/" replace />;
+};
 
 function App() {
-  const [activeTab, setActiveTab] = useState("wishlist");
-  const [selectedPlace, setSelectedPlace] = useState(null);
-  const [wishlist, setWishlist] = useState([]);
-  const [visited, setVisited] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const wishlistRes = await axios.get("http://localhost:5000/api/places/wishlist");
-        const visitedRes = await axios.get("http://localhost:5000/api/places/visited");
-        setWishlist(wishlistRes.data);
-        setVisited(visitedRes.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchData();
-  }, []);
-
   return (
-    <div>
-      <Navbar onSelectPlace={setSelectedPlace} />
-
-      <div className="main-layout">
-        <div className="map-area">
-          <MapView
-            selectedPlace={selectedPlace}
-            setSelectedPlace={setSelectedPlace}
-            setWishlist={setWishlist}
-            setVisited={setVisited}
-          />
-        </div>
-
-        <Sidebar
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          wishlist={wishlist}
-          visited={visited}
-        />
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/"        element={<Login  />} />
+        <Route path="/signup"  element={<Signup />} />
+        <Route path="/home"    element={<Protected><Home /></Protected>} />
+        <Route path="/place/:id"    element={<Protected><PlaceDetail /></Protected>} />
+        <Route path="/state/:name"  element={<Protected><StateDetail /></Protected>} />
+        <Route path="/explore"      element={<Protected><Explore   /></Protected>} />
+        <Route path="/wishlist"     element={<Protected><Wishlist  /></Protected>} />
+        <Route path="/visited"      element={<Protected><Visited   /></Protected>} />
+        <Route path="/visiting"     element={<Protected><Visiting  /></Protected>} />
+        <Route path="*"        element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

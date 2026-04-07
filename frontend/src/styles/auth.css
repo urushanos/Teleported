@@ -1,0 +1,128 @@
+/* ─── AUTH PAGE ─── */
+.auth-page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#globe-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.auth-card {
+  position: relative;
+  z-index: 10;
+  background: rgba(5, 13, 26, 0.78);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(240, 168, 50, 0.18);
+  border-radius: 24px;
+  padding: 44px 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.03);
+}
+
+.auth-logo {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.auth-logo .plane-icon {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 6px;
+  animation: planeFloat 3s ease-in-out infinite;
+}
+@keyframes planeFloat {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50%       { transform: translateY(-8px) rotate(5deg); }
+}
+
+.auth-logo h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #f0a832, #ffd166);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+.auth-logo p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.auth-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 22px;
+  color: var(--text);
+}
+
+.auth-divider {
+  text-align: center;
+  margin: 20px 0;
+  color: var(--text-faint);
+  font-size: 0.8rem;
+  position: relative;
+}
+.auth-divider::before, .auth-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 38%;
+  height: 1px;
+  background: var(--border);
+}
+.auth-divider::before { left: 0; }
+.auth-divider::after  { right: 0; }
+
+.auth-footer {
+  text-align: center;
+  margin-top: 20px;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.password-rules {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pwd-rule {
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s;
+}
+.pwd-rule.ok  { color: var(--teal); }
+.pwd-rule.err { color: var(--text-faint); }
+
+.input-wrapper {
+  position: relative;
+}
+.input-wrapper .eye-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-faint);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+.input-wrapper .eye-btn:hover { color: var(--gold); }

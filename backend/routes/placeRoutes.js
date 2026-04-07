@@ -1,56 +1,72 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const Place = require("../models/Place");
+const Place = require('../models/Place');
 
-router.get("/search", async (req, res) => {
-  const q = req.query.q || "";
+// GET /api/places/popular
+router.get('/popular', async (req, res) => {
   try {
-    const results = await Place.find({
-      name: { $regex: q, $options: "i" }
+    const places = await Place.find({ trending: true }).sort({ wishlistCount: -1 }).limit(12);
+    res.json(places);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// GET /api/places/search?q=
+router.get('/search', async (req, res) => {
+  const { q } = req.query;
+  if (!q) return res.json([]);
+  try {
+    const places = await Place.find({
+      $or: [
+        { name: { $regex: q, $options: 'i' } },
+        { state: { $regex: q, $options: 'i' } },
+      ],
     }).limit(10);
-    res.json(results);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-router.get("/wishlist", async (req, res) => {
-  try {
-    const places = await Place.find({ wishlist: true });
     res.json(places);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
-router.get("/visited", async (req, res) => {
+// GET /api/places/category/:category
+router.get('/category/:category', async (req, res) => {
   try {
-    const places = await Place.find({ visited: true });
+    const places = await Place.find({ category: req.params.category });
     res.json(places);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
-router.put("/wishlist/:id", async (req, res) => {
+// GET /api/places/state/:stateName
+router.get('/state/:stateName', async (req, res) => {
   try {
-    const place = await Place.findById(req.params.id);
-    place.wishlist = !place.wishlist;
-    await place.save();
-    res.json(place);
+    const places = await Place.find({ state: { $regex: req.params.stateName, $options: 'i' } });
+    res.json(places);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
-router.put("/visited/:id", async (req, res) => {
+// GET /api/places/all  — all places (for explore)
+router.get('/all', async (req, res) => {
+  try {
+    const places = await Place.find({}).sort({ wishlistCount: -1 });
+    res.json(places);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// GET /api/places/:id
+router.get('/:id', async (req, res) => {
   try {
     const place = await Place.findById(req.params.id);
-    place.visited = !place.visited;
-    await place.save();
+    if (!place) return res.status(404).json({ message: 'Place not found' });
     res.json(place);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: 'Server error' });
   }
 });
 

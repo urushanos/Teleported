@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiHeart, FiTrash2 } from 'react-icons/fi';
+import { FiCheckSquare, FiTrash2 } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import Navbar from '../components/Navbar';
 import ProfileSidebar from '../components/ProfileSidebar';
@@ -9,9 +9,9 @@ import { usePlaces } from '../context/PlacesContext';
 
 const categoryEmoji = { mountain:'🏔️', beach:'🏖️', hillstation:'⛰️', monument:'🏛️', island:'🏝️', wildlife:'🦁', food:'🍛', amusement:'🎡', city:'🌆' };
 
-export default function Wishlist() {
+export default function Visited() {
   const navigate = useNavigate();
-  const { wishlist, toggleWishlist } = usePlaces();
+  const { visited, toggleVisited } = usePlaces();
   const [profileOpen, setProfileOpen] = useState(false);
 
   useEffect(() => {
@@ -24,33 +24,33 @@ export default function Wishlist() {
     <div className="list-page">
       <Navbar />
       <div className="list-header">
-        <div className="list-title">
-          <FiHeart style={{ color:'var(--gold)' }} /> My Wishlist
+        <div className="list-title" style={{ color:'var(--teal)' }}>
+          <FiCheckSquare style={{ color:'var(--teal)' }} /> Places Visited
         </div>
         <div className="list-subtitle">
-          {wishlist.length} place{wishlist.length !== 1 ? 's' : ''} you dream of visiting
+          {visited.length} place{visited.length !== 1 ? 's' : ''} you've been to
         </div>
       </div>
 
       <div className="list-content">
-        {wishlist.length === 0 ? (
+        {visited.length === 0 ? (
           <motion.div className="empty-state" initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }}>
-            <div className="empty-state-icon">❤️</div>
-            <div className="empty-state-text">Your wishlist is empty</div>
-            <div className="empty-state-sub">Search for places and hit the ❤️ Wishlist button</div>
-            <button className="btn-gold" style={{ marginTop:20 }} onClick={() => navigate('/explore')}>
-              Explore Places
+            <div className="empty-state-icon">✅</div>
+            <div className="empty-state-text">No visited places yet</div>
+            <div className="empty-state-sub">Mark places as visited from the map or place detail page</div>
+            <button className="btn-gold" style={{ marginTop:20 }} onClick={() => navigate('/home')}>
+              Open Map
             </button>
           </motion.div>
         ) : (
           <div className="list-grid">
             <AnimatePresence>
-              {wishlist.map((place, i) => (
+              {visited.map((place, i) => (
                 <motion.div key={place._id}
                   className="place-card-h"
                   initial={{ opacity:0, x:-20 }}
                   animate={{ opacity:1, x:0 }}
-                  exit={{ opacity:0, x:20, height:0 }}
+                  exit={{ opacity:0, x:20 }}
                   transition={{ delay: i * 0.04 }}
                   onClick={() => navigate(`/place/${place._id}`)}>
                   {place.imageUrl
@@ -68,11 +68,11 @@ export default function Wishlist() {
                   <div className="place-card-h-actions">
                     <button
                       style={{ background:'none', border:'none', cursor:'pointer', color:'var(--coral)', padding:8, borderRadius:'50%', transition:'all 0.2s' }}
-                      title="Remove from wishlist"
+                      title="Unmark as visited"
                       onClick={async (e) => {
                         e.stopPropagation();
-                        await toggleWishlist(place._id);
-                        toast('💔 Removed from wishlist');
+                        await toggleVisited(place._id);
+                        toast('Removed from visited');
                       }}>
                       <FiTrash2 size={15} />
                     </button>
