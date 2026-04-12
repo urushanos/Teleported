@@ -39,7 +39,7 @@ export default function GlobeCanvas() {
     const drawGlobe = (cx, cy, R, angle) => {
       // Glow
       const grd = ctx.createRadialGradient(cx, cy, R * 0.3, cx, cy, R * 1.4);
-      grd.addColorStop(0,   'rgba(240,168,50,0.06)');
+      grd.addColorStop(0,   'rgba(196,211,0,0.06)');
       grd.addColorStop(0.5, 'rgba(0,201,167,0.04)');
       grd.addColorStop(1,   'rgba(5,13,26,0)');
       ctx.beginPath();
@@ -69,7 +69,7 @@ export default function GlobeCanvas() {
         const yPos = cy + R * Math.sin(lat);
         ctx.beginPath();
         ctx.ellipse(cx, yPos, ry, ry * 0.18, 0, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(240,168,50,0.12)';
+        ctx.strokeStyle = 'rgba(196,211,0,0.12)';
         ctx.lineWidth = 0.7;
         ctx.stroke();
       }
@@ -82,7 +82,7 @@ export default function GlobeCanvas() {
         const alpha = 0.05 + 0.1 * (0.5 + 0.5 * Math.cos(lngAngle));
         ctx.beginPath();
         ctx.ellipse(cx, cy, rx, R, 0, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(240,168,50,${alpha})`;
+        ctx.strokeStyle = `rgba(196,211,0,${alpha})`;
         ctx.lineWidth = 0.7;
         ctx.stroke();
       }
@@ -99,7 +99,7 @@ export default function GlobeCanvas() {
       // Globe outline
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(240,168,50,0.25)';
+      ctx.strokeStyle = 'rgba(196,211,0,0.25)';
       ctx.lineWidth = 1.5;
       ctx.stroke();
 

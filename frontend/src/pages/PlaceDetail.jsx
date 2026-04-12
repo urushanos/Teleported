@@ -171,13 +171,13 @@ export default function PlaceDetail() {
               <div style={{ fontSize:'0.7rem', color:'var(--text-faint)', textTransform:'uppercase', letterSpacing:'0.8px' }}>Community</div>
               <div style={{ marginTop:8, display:'flex', gap:16 }}>
                 <div>
-                  <div style={{ fontFamily:'Outfit', fontWeight:800, fontSize:'1.3rem', color:'var(--gold)' }}>
+                  <div style={{ fontFamily:'Space Mono', fontWeight:800, fontSize:'1.3rem', color:'var(--gold)' }}>
                     {place.wishlistCount.toLocaleString()}
                   </div>
                   <div style={{ fontSize:'0.72rem', color:'var(--text-muted)' }}>Wishlisted</div>
                 </div>
                 <div>
-                  <div style={{ fontFamily:'Outfit', fontWeight:800, fontSize:'1.3rem', color:'var(--teal)' }}>
+                  <div style={{ fontFamily:'Space Mono', fontWeight:800, fontSize:'1.3rem', color:'var(--teal)' }}>
                     {(place.visitedCount || 0).toLocaleString()}
                   </div>
                   <div style={{ fontSize:'0.72rem', color:'var(--text-muted)' }}>Visited</div>

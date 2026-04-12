@@ -22,7 +22,7 @@ root.render(
           position="bottom-right"
           autoClose={2500}
           theme="dark"
-          toastStyle={{ fontFamily: 'Inter, sans-serif' }}
+          toastStyle={{ fontFamily: 'Space Mono, sans-serif' }}
         />
       </PlacesProvider>
     </AuthProvider>

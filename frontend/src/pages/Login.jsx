@@ -27,7 +27,7 @@ export default function Login() {
       setLoading(true);
       const { data } = await axios.post('http://localhost:5000/api/auth/login', form);
       login(data.token, data.user);
-      toast.success(`Welcome back, ${data.user.username}! 🌏`);
+      toast.success(`Welcome back, ${data.user.username}!`);
       navigate('/home');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Check your credentials.');
@@ -46,12 +46,12 @@ export default function Login() {
         transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
       >
         <div className="auth-logo">
-          <span className="plane-icon">✈️</span>
+          {/*<span className="plane-icon">✈️</span>*/}
           <h1>Teleported</h1>
           <p>Your travel dreams, mapped.</p>
         </div>
 
-        <div className="auth-title">Welcome back</div>
+        <div className="auth-title">Welcome back Traveler!</div>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -89,7 +89,7 @@ export default function Login() {
           {error && <div className="form-error" style={{ marginBottom: 12 }}>{error}</div>}
 
           <button className="btn-gold" type="submit" disabled={loading} style={{ width: '100%', padding: '12px' }}>
-            {loading ? 'Signing in…' : 'Sign In 🌏'}
+            {loading ? 'Signing in…' : 'Sign In'}
           </button>
         </form>
 

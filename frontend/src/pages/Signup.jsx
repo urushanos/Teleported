@@ -26,8 +26,8 @@ export default function Signup() {
   const p = form.password;
   const rules = {
     length:  p.length >= 8,
-    upper:   /[A-Z]/.test(p),
-    number:  /[0-9]/.test(p),
+    //upper:   /[A-Z]/.test(p),
+    //number:  /[0-9]/.test(p),
     special: /[!@#$%^&*(),.?":{}|<>]/.test(p),
   };
 
@@ -48,7 +48,7 @@ export default function Signup() {
         password: form.password,
       });
       login(data.token, data.user);
-      toast.success(`Welcome aboard, ${data.user.username}! ✈️`);
+      toast.success(`Welcome aboard, ${data.user.username}!`);
       navigate('/home');
     } catch (err) {
       setError(err.response?.data?.message || err.response?.data?.errors?.[0]?.msg || 'Signup failed');
@@ -67,7 +67,7 @@ export default function Signup() {
         transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
       >
         <div className="auth-logo">
-          <span className="plane-icon">✈️</span>
+          {/*<span className="plane-icon">✈️</span>*/}
           <h1>Teleported</h1>
           <p>Your travel dreams, mapped.</p>
         </div>
@@ -80,7 +80,7 @@ export default function Signup() {
             <input
               className="form-input"
               name="username"
-              placeholder="e.g. wanderer_urvi"
+              placeholder="Enter Username"
               value={form.username}
               onChange={handleChange}
               required
@@ -94,7 +94,7 @@ export default function Signup() {
               className="form-input"
               name="email"
               type="email"
-              placeholder="you@example.com"
+              placeholder="Enter Email"
               value={form.email}
               onChange={handleChange}
               required
@@ -108,7 +108,7 @@ export default function Signup() {
                 className="form-input"
                 name="password"
                 type={show.password ? 'text' : 'password'}
-                placeholder="Min 8 chars, 1 uppercase, 1 number, 1 special"
+                placeholder="Minimum 8 characters"
                 value={form.password}
                 onChange={handleChange}
                 required
@@ -120,8 +120,8 @@ export default function Signup() {
             {form.password && (
               <div className="password-rules">
                 <PasswordRule ok={rules.length}  text="At least 8 characters" />
-                <PasswordRule ok={rules.upper}   text="One uppercase letter" />
-                <PasswordRule ok={rules.number}  text="One number" />
+                {/*<PasswordRule ok={rules.upper}   text="One uppercase letter" />
+                <PasswordRule ok={rules.number}  text="One number" /> */}
                 <PasswordRule ok={rules.special} text="One special character (!@#$…)" />
               </div>
             )}
@@ -151,7 +151,7 @@ export default function Signup() {
           {error && <div className="form-error" style={{ marginBottom: 12 }}>{error}</div>}
 
           <button className="btn-gold" type="submit" disabled={loading} style={{ width: '100%', padding: '12px' }}>
-            {loading ? 'Creating account…' : 'Create Account ✈️'}
+            {loading ? 'Creating account…' : 'Create Account'}
           </button>
         </form>
 

@@ -29,7 +29,7 @@ export default function Navbar({ onSelectPlace }) {
       <nav className="teleported-navbar">
         {/* Logo */}
         <div className="nav-logo" onClick={() => navigate('/home')} style={{ cursor:'pointer' }}>
-          <span className="nav-logo-icon">✈️</span>
+          {/*<span className="nav-logo-icon">✈️</span> */}
           <span className="nav-logo-text">Teleported</span>
         </div>
 

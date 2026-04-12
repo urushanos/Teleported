@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import markerIcon from '../assets/marker.svg';
 
 const INDIA = { center: [78.9629, 22.5937], zoom: 4.8 };
 
@@ -61,11 +62,11 @@ export default function MapView({ selectedPlace, onMarkerClick }) {
     const el = document.createElement('div');
     el.style.cssText = `
       width:28px; height:38px;
-      background:linear-gradient(135deg,#f0a832,#e09020);
+      background:linear-gradient(135deg,var(--gold),var(--gold-dark));
       border-radius:50% 50% 50% 0;
       transform:rotate(-45deg);
       border:2px solid rgba(255,255,255,0.25);
-      box-shadow:0 4px 14px rgba(240,168,50,0.55);
+      box-shadow:0 4px 14px rgba(var(--gold-rgb),0.55);
       cursor:pointer;
       transition:transform 0.2s;
     `;

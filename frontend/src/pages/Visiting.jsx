@@ -168,7 +168,7 @@ export default function Visiting() {
         <Navbar />
         <div style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:16 }}>
           <div style={{ fontSize:'3rem' }}>🗺️</div>
-          <div style={{ fontFamily:'Outfit', fontSize:'1.2rem', fontWeight:700 }}>Not visiting anywhere right now</div>
+          <div style={{ fontFamily:'Space Mono', fontSize:'1.2rem', fontWeight:700 }}>Not visiting anywhere right now</div>
           <div style={{ color:'var(--text-muted)', fontSize:'0.9rem' }}>Find a place on the map and hit "Visiting" to start your journal</div>
           <button className="btn-gold" onClick={() => navigate('/home')}>Open Map</button>
         </div>
@@ -185,7 +185,7 @@ export default function Visiting() {
 
       {/* Header */}
       <div className="visiting-header">
-        <div style={{ fontFamily:'Outfit', fontWeight:800, fontSize:'1.3rem', color:'var(--gold)' }}>
+        <div style={{ fontFamily:'Space Mono', fontWeight:800, fontSize:'1.3rem', color:'var(--gold)' }}>
           ✈️ Journey Journal
         </div>
         <div className="visiting-place-info">

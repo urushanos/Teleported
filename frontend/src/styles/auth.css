@@ -23,7 +23,7 @@
   background: rgba(5, 13, 26, 0.78);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(240, 168, 50, 0.18);
+  border: 1px solid rgba(var(--gold-rgb), 0.18);
   border-radius: 24px;
   padding: 44px 40px;
   width: 100%;
@@ -47,10 +47,10 @@
 }
 
 .auth-logo h1 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Space Mono', sans-serif;
   font-size: 2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #f0a832, #ffd166);
+  background: linear-gradient(135deg, var(--gold), #ffd166);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

@@ -1,15 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /* ─── CSS Variables ─── */
 :root {
-  --bg-deep: #050d1a;
-  --bg-surface: #0d1b2e;
-  --bg-card: #111f35;
-  --bg-glass: rgba(13, 27, 46, 0.82);
+  --bg-deep: #121415;
+  --bg-surface: #1a1c1d;
+  --bg-card: #222627;
+  --bg-glass: rgba(26, 28, 29, 0.82);
   --border: rgba(255, 255, 255, 0.07);
-  --border-hover: rgba(240, 168, 50, 0.35);
-  --gold: #f0a832;
-  --gold-light: #ffd166;
+  --border-hover: rgba(var(--gold-rgb), 0.35);
+  --gold: #c4d300;
+  --gold-dark: #a8b500;
+  --gold-rgb: 196, 211, 0;
+  --gold-light: #e2f033;
   --teal: #00c9a7;
   --coral: #ff6b6b;
   --purple: #a78bfa;
@@ -23,22 +25,25 @@
   --radius-lg: 20px;
   --radius-xl: 28px;
   --shadow-card: 0 8px 32px rgba(0,0,0,0.45);
-  --shadow-glow: 0 0 24px rgba(240,168,50,0.18);
+  --shadow-glow: 0 0 24px rgba(var(--gold-rgb), 0.18);
   --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
 }
 
 /* Light mode */
 body.light-mode {
-  --bg-deep: #f0f4f8;
+  --bg-deep: #f5f2eb;
   --bg-surface: #ffffff;
-  --bg-card: #f8fafc;
+  --bg-card: #f9f7f4;
   --bg-glass: rgba(255,255,255,0.88);
   --border: rgba(0,0,0,0.08);
-  --border-hover: rgba(240, 168, 50, 0.38);
-  --text: #1a2540;
-  --text-muted: #4a5a7a;
-  --text-faint: #9aa5b4;
-  --shadow-card: 0 8px 32px rgba(0,0,0,0.12);
+  --border-hover: rgba(var(--gold-rgb), 0.38);
+  --gold: #e63946;
+  --gold-dark: #c1121f;
+  --gold-rgb: 230, 57, 70;
+  --text: #2c3033;
+  --text-muted: #687076;
+  --text-faint: #a0aab2;
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.06);
 }
 
 /* ─── Reset & Base ─── */
@@ -51,14 +56,14 @@ html, body, #root {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Mono', sans-serif;
   background: var(--bg-deep);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   transition: background var(--transition), color var(--transition);
 }
 
-h1, h2, h3, h4, h5 { font-family: 'Outfit', sans-serif; font-weight: 700; }
+h1, h2, h3, h4, h5 { font-family: 'Space Mono', sans-serif; font-weight: 700; }
 
 a { color: var(--gold); text-decoration: none; }
 a:hover { color: var(--gold-light); }
@@ -66,7 +71,7 @@ a:hover { color: var(--gold-light); }
 /* ─── Scrollbar ─── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(240,168,50,0.3); border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: rgba(var(--gold-rgb),0.3); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 
 /* ─── Utility ─── */
@@ -82,9 +87,9 @@ a:hover { color: var(--gold-light); }
 .muted-text { color: var(--text-muted); font-size: 0.85rem; }
 
 .btn-gold {
-  background: linear-gradient(135deg, var(--gold), #e09020);
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
   color: #111;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Space Mono', sans-serif;
   font-weight: 600;
   font-size: 0.95rem;
   padding: 10px 22px;
@@ -94,13 +99,13 @@ a:hover { color: var(--gold-light); }
   transition: var(--transition);
   letter-spacing: 0.3px;
 }
-.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(240,168,50,0.4); }
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(var(--gold-rgb),0.4); }
 .btn-gold:active { transform: translateY(0); }
 
 .btn-ghost {
   background: transparent;
   color: var(--text-muted);
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Space Mono', sans-serif;
   font-weight: 500;
   font-size: 0.9rem;
   padding: 9px 18px;
@@ -123,7 +128,7 @@ a:hover { color: var(--gold-light); }
   border-radius: 50%;
   padding: 6px;
 }
-.btn-icon:hover { color: var(--gold); background: rgba(240,168,50,0.1); }
+.btn-icon:hover { color: var(--gold); background: rgba(var(--gold-rgb),0.1); }
 
 /* ─── Page Wrapper ─── */
 .page-container {
@@ -151,13 +156,13 @@ a:hover { color: var(--gold-light); }
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   color: var(--text);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Mono', sans-serif;
   font-size: 0.95rem;
   padding: 12px 14px;
   outline: none;
   transition: var(--transition);
 }
-.form-input:focus { border-color: var(--gold); background: rgba(240,168,50,0.05); box-shadow: 0 0 0 3px rgba(240,168,50,0.1); }
+.form-input:focus { border-color: var(--gold); background: rgba(var(--gold-rgb),0.05); box-shadow: 0 0 0 3px rgba(var(--gold-rgb),0.1); }
 .form-input::placeholder { color: var(--text-faint); }
 
 .form-error { color: var(--coral); font-size: 0.8rem; margin-top: 5px; }
@@ -170,7 +175,7 @@ a:hover { color: var(--gold-light); }
   gap: 4px;
   font-size: 0.72rem;
   font-weight: 600;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Space Mono', sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.6px;
   padding: 3px 9px;
@@ -179,7 +184,7 @@ a:hover { color: var(--gold-light); }
 .badge-mountain { background: rgba(96,165,250,0.15); color: #60a5fa; }
 .badge-beach { background: rgba(0,201,167,0.15); color: var(--teal); }
 .badge-hillstation { background: rgba(134,239,172,0.15); color: #86efac; }
-.badge-monument { background: rgba(240,168,50,0.15); color: var(--gold); }
+.badge-monument { background: rgba(var(--gold-rgb),0.15); color: var(--gold); }
 .badge-island { background: rgba(244,114,182,0.15); color: #f472b6; }
 .badge-wildlife { background: rgba(251,146,60,0.15); color: #fb923c; }
 .badge-food { background: rgba(248,113,113,0.15); color: #f87171; }
@@ -187,5 +192,5 @@ a:hover { color: var(--gold-light); }
 .badge-city { background: rgba(232,234,246,0.12); color: var(--text-muted); }
 
 /* ─── Toast override ─── */
-.Toastify__toast { font-family: 'Inter', sans-serif; border-radius: var(--radius-sm) !important; }
+.Toastify__toast { font-family: 'Space Mono', sans-serif; border-radius: var(--radius-sm) !important; }
 .Toastify__toast--dark { background: var(--bg-card) !important; color: var(--text) !important; }
